@@ -25,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    mainState.fillUserCityOnInit();
+    mainState.initUserData();
     mainState.fetchDataByCurrentCity();
     super.initState();
   }

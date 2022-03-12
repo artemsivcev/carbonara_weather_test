@@ -41,10 +41,25 @@ abstract class _MainState with Store {
     }
     return Constants.defaultCity;
   }
+
+  Future<String> get loadDegrees async {
+    var prevUserDegrees = await userSettingsApi.getUserTempType();
+    if (prevUserDegrees) {
+      userDegrees =  "F°";
+      return "F°";
+    }
+    userDegrees = "C°";
+    return "C°";
+  }
+
+  @observable
+  String userDegrees = "C°";
+
   @action
-  Future<void> fillUserCityOnInit() async {
+  Future<void> initUserData() async {
     var city = await userPrevCity;
     userCityController.text = city;
+    await loadDegrees;
   }
 
   @action
@@ -94,5 +109,15 @@ abstract class _MainState with Store {
   @action
   void selectDay(int index) {
     selectedWeather = lastLoadedWeather!.consolidated_weather[index];
+  }
+
+  @action
+  Future<void> changeDegrees() async {
+    var isFahrenheit = false;
+    if(userDegrees.contains("C")){
+      isFahrenheit = true;
+    }
+    await userSettingsApi.saveUserTempType(isFahrenheit: isFahrenheit);
+    await loadDegrees;
   }
 }

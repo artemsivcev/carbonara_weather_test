@@ -1,4 +1,6 @@
+import 'package:carbonara_weather_test/di/injector_provider.dart';
 import 'package:carbonara_weather_test/domain/constants/constants.dart';
+import 'package:carbonara_weather_test/domain/states/main_state.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -27,6 +29,8 @@ class Weather {
 
 @JsonSerializable()
 class ConsolidatedWeather {
+  final mainState = injector<MainState>();
+
   final String weather_state_name;
   final String weather_state_abbr;
 
@@ -71,15 +75,24 @@ class ConsolidatedWeather {
   }
 
   String getMinTempFormatted() {
-    return min_temp.roundToDouble().toString();
+    return convertTemp(min_temp);
   }
 
   String getMaxTempFormatted() {
-    return max_temp.roundToDouble().toString();
+    return convertTemp(max_temp);
   }
 
   String getTheTempFormatted() {
-    return the_temp.roundToDouble().toString();
+    return convertTemp(the_temp);
+  }
+
+  String convertTemp(double temp) {
+    var varTemp = temp;
+    if (mainState.userDegrees.contains("F")) {
+      varTemp = (temp * 9 / 5) + 32;
+    }
+
+    return varTemp.toStringAsFixed(2) + " " + mainState.userDegrees.toString();
   }
 
   String getHumidityFormatted() {
