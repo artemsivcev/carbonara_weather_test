@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Carbonara Weather App',
       theme: ThemeData(
         primaryColor: colorsBackgroundMain,
+        bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.transparent),
       ),
       home: const MainScreen(),
     );

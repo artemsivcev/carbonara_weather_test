@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'colours.dart';
 
+TextStyle textStyleMain16 = TextStyle(
+    color: colorsTextMain,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Open Sans',
+    fontSize: 16);
+
 TextStyle textStyleMain24 = TextStyle(
     color: colorsTextMain,
     fontWeight: FontWeight.w900,

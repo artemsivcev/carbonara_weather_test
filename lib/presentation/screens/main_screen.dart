@@ -47,28 +47,37 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     screenState.setScreenSize(context);
-    return Scaffold(
-      backgroundColor: colorsBackgroundMain,
-      body: Observer(builder: (context) {
-        if (mainState.isLoading) {
-          return const Loader();
-        }
-        return RefreshIndicator(
-          onRefresh: () async {
-            await mainState.fetchDataByCurrentCity();
-          },
-          triggerMode: RefreshIndicatorTriggerMode.anywhere,
-          child: ListView(
-            children: [
-              const SearchBar(),
-              mainState.searchingError
-                  ? const ErrorWithText()
-                  : const CurrentDay(),
-              mainState.searchingError ? Container() : const ListOfDays(),
-            ],
-          ),
-        );
-      }),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: colorsBackgroundMain,
+        body: Observer(builder: (context) {
+          if (mainState.isLoading) {
+            return const Loader();
+          }
+          return RefreshIndicator(
+            onRefresh: () async {
+              await mainState.fetchDataByCurrentCity();
+            },
+            triggerMode: RefreshIndicatorTriggerMode.anywhere,
+            child: CustomScrollView(
+              slivers: [
+                SliverFillRemaining(
+                  child: Column(
+                    children: [
+                      const SearchBar(),
+                      mainState.searchingError
+                          ? const ErrorWithText()
+                          : const CurrentDay(),
+                      const Spacer(),
+                      mainState.searchingError ? Container() : const ListOfDays(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 }

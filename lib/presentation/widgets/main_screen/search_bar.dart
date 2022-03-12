@@ -1,4 +1,5 @@
 import 'package:carbonara_weather_test/di/injector_provider.dart';
+import 'package:carbonara_weather_test/domain/constants/colours.dart';
 import 'package:carbonara_weather_test/domain/constants/text_styles.dart';
 import 'package:carbonara_weather_test/domain/states/main_state.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,10 @@ class _SearchBarState extends State<SearchBar> {
           prefixIcon: Icon(
             Icons.add_location_alt,
             size: 21,
+            color: colorsTextButton,
           ),
         ),
+        cursorColor: colorsTextButton,
         style: textStyleMain24,
         onEditingComplete: () => {
               FocusScope.of(context).unfocus(),

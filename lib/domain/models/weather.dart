@@ -70,36 +70,36 @@ class ConsolidatedWeather {
     return "${Constants.baseURL}/static/img/weather/png/64/$weather_state_abbr.png";
   }
 
-  String getMinTempFormatted(){
+  String getMinTempFormatted() {
     return min_temp.roundToDouble().toString();
   }
 
-  String getMaxTempFormatted(){
+  String getMaxTempFormatted() {
     return max_temp.roundToDouble().toString();
   }
 
-  String getTheTempFormatted(){
+  String getTheTempFormatted() {
     return the_temp.roundToDouble().toString();
   }
 
-  String getHumidityFormatted(){
-    return humidity.roundToDouble().toString();
+  String getHumidityFormatted() {
+    return humidity.roundToDouble().toString() + "%";
   }
 
-  String getAirPressureFormatted(){
-    return air_pressure.roundToDouble().toString();
+  String getAirPressureFormatted() {
+    return air_pressure.roundToDouble().toString() + " mbar";
   }
 
-  String getWindSpeedFormatted(){
-    return wind_speed.roundToDouble().toString();
+  String getWindSpeedFormatted() {
+    return wind_speed.roundToDouble().toString() + " mph";
   }
 
-  String getDateFormatted(){
+  String getDateFormatted() {
     var localDate = DateTime.parse(applicable_date).toLocal();
     return DateFormat('yyyy.MM.dd EEEE').format(localDate).toString();
   }
 
-  String getDayOfWeekFromDateFormatted(){
+  String getDayOfWeekFromDateFormatted() {
     var localDate = DateTime.parse(applicable_date).toLocal();
     return DateFormat('EEEE').format(localDate).toString();
   }
