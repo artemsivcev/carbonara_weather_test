@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:carbonara_weather_test/data/weather_api.dart';
+import 'package:carbonara_weather_test/di/injector_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobx/mobx.dart';
@@ -12,17 +14,26 @@ class MainState = _MainState with _$MainState;
 /// For example, when the user wants to go back or choosing
 /// to play the game with image or not.
 abstract class _MainState with Store {
-  @observable
-  GameState currentGameState = GameState.ENTRY;
+  final WeatherApi weatherApi = injector<WeatherApi>();
 
-  @observable
-  GameState? previousGameState;
+  // @observable
+  // GameState currentGameState = GameState.ENTRY;
+  //
+  // @observable
+  // GameState? previousGameState;
+  //
+  // @action
+  // changeCurrentGameState(GameState state) {
+  //   previousGameState = currentGameState;
+  //
+  //   currentGameState = state;
+  // }
 
   @action
-  changeCurrentGameState(GameState state) {
-    previousGameState = currentGameState;
-
-    currentGameState = state;
+  Future<void> getDataByCity(String city) async {
+    await weatherApi.getDataByCity(city).then((cityData) async =>
+    await weatherApi.getWeatherByWOEIDForToday(cityData.woeid).then((weather) => null)
+    );
   }
 
   // /// restore all bools and go back to menu

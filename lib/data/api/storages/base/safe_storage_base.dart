@@ -7,9 +7,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 /// your own methods which will be based on [save] and [read] methods.
 ///
 /// After what create DB service to work with your storage.
-/// See classes from the data/api/db_service/services folder.
+/// See classes from the data/api/storage/ folder.
 abstract class SafeStorageBase {
-  static final _storage = FlutterSecureStorage();
+  static const _storage = FlutterSecureStorage();
 
   Future<void> save({required String keyName, required String value}) async {
     assert(keyName.isNotEmpty, "The key can't be empty!");

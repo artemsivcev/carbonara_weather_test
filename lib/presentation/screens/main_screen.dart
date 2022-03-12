@@ -1,5 +1,6 @@
 import 'package:carbonara_weather_test/di/injector_provider.dart';
 import 'package:carbonara_weather_test/domain/constants/colours.dart';
+import 'package:carbonara_weather_test/domain/states/main_state.dart';
 import 'package:carbonara_weather_test/domain/states/screen_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -13,11 +14,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final screenState = injector<ScreenState>();
+  final mainState = injector<MainState>();
 
   @override
   Widget build(BuildContext context) {
     screenState.setScreenSize(context);
     return Observer(builder: (context) {
+      mainState.getDataByCity("paris");
       return Material(
         type: MaterialType.transparency,
         child: Container(

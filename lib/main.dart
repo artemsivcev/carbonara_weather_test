@@ -20,14 +20,14 @@ Future<void> init() async {
     BuildContext? context = binding.renderViewElement;
     if (context != null) {
       // Run any sync or awaited async function you want to wait for before showing your UI
-      await precacheImage(
-          const AssetImage('assets/images/avatar_artem.png'), context);
-      await precacheImage(
-          const AssetImage('assets/images/avatar_dasha.png'), context);
-      await precacheImage(
-          const AssetImage('assets/images/avatar_maxim.png'), context);
-      await precacheImage(
-          const AssetImage('assets/images/avatar_chris.png'), context);
+      // await precacheImage(
+      //     const AssetImage('assets/images/avatar_artem.png'), context);
+      // await precacheImage(
+      //     const AssetImage('assets/images/avatar_dasha.png'), context);
+      // await precacheImage(
+      //     const AssetImage('assets/images/avatar_maxim.png'), context);
+      // await precacheImage(
+      //     const AssetImage('assets/images/avatar_chris.png'), context);
     }
     binding.allowFirstFrame();
   });
