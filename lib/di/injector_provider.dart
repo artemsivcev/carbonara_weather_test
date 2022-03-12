@@ -1,3 +1,4 @@
+import 'package:carbonara_weather_test/data/user_settings_api.dart';
 import 'package:carbonara_weather_test/data/weather_api.dart';
 import 'package:carbonara_weather_test/domain/states/main_state.dart';
 import 'package:carbonara_weather_test/domain/states/screen_state.dart';
@@ -9,6 +10,7 @@ final GetIt injector = GetIt.I;
 
 Future<void> setupInjection() async {
   injector.registerLazySingleton(() => WeatherApi());
+  injector.registerLazySingleton(() => UserSettingsApi());
 
   injector.registerLazySingleton(() => ScreenState());
   injector.registerLazySingleton(() => MainState());

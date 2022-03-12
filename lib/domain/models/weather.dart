@@ -1,3 +1,5 @@
+import 'package:carbonara_weather_test/domain/constants/constants.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part "weather.g.dart";
@@ -63,4 +65,42 @@ class ConsolidatedWeather {
       _$ConsolidatedWeatherFromJson(json);
 
   Map<String, dynamic> toJson() => _$ConsolidatedWeatherToJson(this);
+
+  String getImageLink() {
+    return "${Constants.baseURL}/static/img/weather/png/64/$weather_state_abbr.png";
+  }
+
+  String getMinTempFormatted(){
+    return min_temp.roundToDouble().toString();
+  }
+
+  String getMaxTempFormatted(){
+    return max_temp.roundToDouble().toString();
+  }
+
+  String getTheTempFormatted(){
+    return the_temp.roundToDouble().toString();
+  }
+
+  String getHumidityFormatted(){
+    return humidity.roundToDouble().toString();
+  }
+
+  String getAirPressureFormatted(){
+    return air_pressure.roundToDouble().toString();
+  }
+
+  String getWindSpeedFormatted(){
+    return wind_speed.roundToDouble().toString();
+  }
+
+  String getDateFormatted(){
+    var localDate = DateTime.parse(applicable_date).toLocal();
+    return DateFormat('yyyy.MM.dd EEEE').format(localDate).toString();
+  }
+
+  String getDayOfWeekFromDateFormatted(){
+    var localDate = DateTime.parse(applicable_date).toLocal();
+    return DateFormat('EEEE').format(localDate).toString();
+  }
 }

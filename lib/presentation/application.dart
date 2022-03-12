@@ -1,4 +1,5 @@
 import 'package:carbonara_weather_test/domain/constants/colours.dart';
+import 'package:carbonara_weather_test/presentation/screens/error_screen.dart';
 import 'package:carbonara_weather_test/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Carbonara Weather App',
       theme: ThemeData(
-        primaryColor: colorsBackgroundMenu,
+        primaryColor: colorsBackgroundMain,
       ),
       home: const MainScreen(),
     );

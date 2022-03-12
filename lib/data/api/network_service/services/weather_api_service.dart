@@ -11,7 +11,7 @@ class WeatherApiService extends ApiServiceBase {
       "query": query,
     };
     var response =
-        await dio.get('location/search/', queryParameters: queryParameters);
+        await dio.get('api/location/search/', queryParameters: queryParameters);
 
     return response;
   }
@@ -19,7 +19,7 @@ class WeatherApiService extends ApiServiceBase {
   Future<Response?> getWeatherByWOEIDForToday({
     required int woeid,
   }) async {
-    var response = await dio.get('location/$woeid');
+    var response = await dio.get('api/location/$woeid');
 
     return response;
   }
