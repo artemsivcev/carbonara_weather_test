@@ -20,6 +20,12 @@ abstract class _MainState with Store {
   @observable
   bool isLoading = false;
 
+  @observable
+  bool searchingError = false;
+
+  @observable
+  bool dataFetchingError = false;
+
   final TextEditingController userCityController = TextEditingController();
 
   @observable
@@ -35,20 +41,40 @@ abstract class _MainState with Store {
     }
     return Constants.defaultCity;
   }
+  @action
+  Future<void> fillUserCityOnInit() async {
+    var city = await userPrevCity;
+    userCityController.text = city;
+  }
 
   @action
   Future<void> fetchDataByCurrentCity() async {
     isLoading = true;
+    resetErrors();
     var city = await getCurrentCity();
     saveUserCity(city);
-    await weatherApi.getDataByCity(city).then((cityData) async =>
-        await weatherApi.getWeatherByWOEIDForToday(cityData.woeid).then(
+    await weatherApi
+        .getDataByCity(city)
+        .then((cityData) async => await weatherApi
+            .getWeatherByWOEIDForToday(cityData.woeid)
+            .then(
               (weather) => {
                 lastLoadedWeather = weather,
                 selectedWeather = lastLoadedWeather!.consolidated_weather.first,
               },
-            ));
+            )
+            .onError((error, stackTrace) => {
+                  dataFetchingError = true,
+                }))
+        .onError((error, stackTrace) => {
+              searchingError = true,
+            });
     isLoading = false;
+  }
+
+  void resetErrors() {
+    dataFetchingError = false;
+    searchingError = false;
   }
 
   Future<String> getCurrentCity() async {

@@ -4,11 +4,13 @@ import 'package:carbonara_weather_test/domain/states/main_state.dart';
 import 'package:carbonara_weather_test/domain/states/screen_state.dart';
 import 'package:carbonara_weather_test/presentation/screens/error_screen.dart';
 import 'package:carbonara_weather_test/presentation/widgets/common/loader.dart';
+import 'package:carbonara_weather_test/presentation/widgets/error_screen/error_with_text.dart';
 import 'package:carbonara_weather_test/presentation/widgets/main_screen/current_day.dart';
 import 'package:carbonara_weather_test/presentation/widgets/main_screen/list_of_days.dart';
 import 'package:carbonara_weather_test/presentation/widgets/main_screen/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -23,15 +25,23 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    mainState.fetchDataByCurrentCity().onError(
-          (error, stackTrace) {
-            mainState.isLoading = false;
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ErrorScreen()));
-          }
-      );
+    mainState.fillUserCityOnInit();
+    mainState.fetchDataByCurrentCity();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    /// Automatic transition to the authorization screen.
+    reaction<bool?>(
+      (_) => mainState.dataFetchingError,
+      (error) async {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ErrorScreen()));
+      },
+    );
   }
 
   @override
@@ -39,33 +49,26 @@ class _MainScreenState extends State<MainScreen> {
     screenState.setScreenSize(context);
     return Scaffold(
       backgroundColor: colorsBackgroundMain,
-      body: Observer(
-        builder: (context) {
-          if(mainState.isLoading){
-            return const Loader();
-          }
-          return RefreshIndicator(
-            onRefresh: () async {
-              await mainState.fetchDataByCurrentCity().onError(
-                    (error, stackTrace) {
-              mainState.isLoading = false;
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ErrorScreen()),
-              );
-            });
-            },
-            triggerMode: RefreshIndicatorTriggerMode.anywhere,
-            child: ListView(
-              children: const [
-                SearchBar(),
-                CurrentDay(),
-                ListOfDays(),
-              ],
-            ),
-          );
+      body: Observer(builder: (context) {
+        if (mainState.isLoading) {
+          return const Loader();
         }
-      ),
+        return RefreshIndicator(
+          onRefresh: () async {
+            await mainState.fetchDataByCurrentCity();
+          },
+          triggerMode: RefreshIndicatorTriggerMode.anywhere,
+          child: ListView(
+            children: [
+              const SearchBar(),
+              mainState.searchingError
+                  ? const ErrorWithText()
+                  : const CurrentDay(),
+              mainState.searchingError ? Container() : const ListOfDays(),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
