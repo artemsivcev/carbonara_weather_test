@@ -16,23 +16,27 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-        controller: mainState.userCityController,
-        decoration: const InputDecoration(
-          border: InputBorder.none,
-          fillColor: Colors.transparent,
-          filled: true,
-          prefixIcon: Icon(
-            Icons.add_location_alt,
-            size: 21,
-            color: colorsTextButton,
+    return SizedBox(
+      height: 56,
+      width: MediaQuery.of(context).size.height,
+      child: TextFormField(
+          controller: mainState.userCityController,
+          decoration: const InputDecoration(
+            border: InputBorder.none,
+            fillColor: Colors.transparent,
+            filled: true,
+            prefixIcon: Icon(
+              Icons.add_location_alt,
+              size: 21,
+              color: colorsTextButton,
+            ),
           ),
-        ),
-        cursorColor: colorsTextButton,
-        style: textStyleMain24,
-        onEditingComplete: () => {
-              FocusScope.of(context).unfocus(),
-              mainState.fetchDataByCurrentCity(),
-            });
+          cursorColor: colorsTextButton,
+          style: textStyleMain24,
+          onEditingComplete: () => {
+                FocusScope.of(context).unfocus(),
+                mainState.fetchDataByCurrentCity(),
+              }),
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:carbonara_weather_test/di/injector_provider.dart';
 import 'package:carbonara_weather_test/domain/constants/text_styles.dart';
 import 'package:carbonara_weather_test/domain/states/main_state.dart';
+import 'package:carbonara_weather_test/domain/states/screen_state.dart';
 import 'package:carbonara_weather_test/presentation/widgets/common/parameter_with_icon_row.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,16 @@ class CurrentDay extends StatefulWidget {
 
 class _CurrentDayState extends State<CurrentDay> {
   final mainState = injector<MainState>();
+  final screenState = injector<ScreenState>();
 
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
+      var isPortrait = screenState.isPortrait(context);
+      var imageSize = MediaQuery.of(context).size.width * 0.5;
+      if (!isPortrait) {
+        imageSize = MediaQuery.of(context).size.height * 0.2;
+      }
       return Column(
         children: [
           Padding(
@@ -30,7 +37,7 @@ class _CurrentDayState extends State<CurrentDay> {
           ),
           Image.network(
             mainState.selectedWeather?.getImageLink() ?? "",
-            width: MediaQuery.of(context).size.width * 0.5,
+            width: imageSize,
             fit: BoxFit.fill,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) return child;

@@ -4,10 +4,8 @@ import 'package:carbonara_weather_test/domain/states/main_state.dart';
 import 'package:carbonara_weather_test/domain/states/screen_state.dart';
 import 'package:carbonara_weather_test/presentation/screens/error_screen.dart';
 import 'package:carbonara_weather_test/presentation/widgets/common/loader.dart';
-import 'package:carbonara_weather_test/presentation/widgets/error_screen/error_with_text.dart';
-import 'package:carbonara_weather_test/presentation/widgets/main_screen/current_day.dart';
-import 'package:carbonara_weather_test/presentation/widgets/main_screen/list_of_days.dart';
-import 'package:carbonara_weather_test/presentation/widgets/main_screen/search_bar.dart';
+import 'package:carbonara_weather_test/presentation/widgets/main_screen/horizontal_orientation.dart';
+import 'package:carbonara_weather_test/presentation/widgets/main_screen/portrait_orientation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -62,16 +60,13 @@ class _MainScreenState extends State<MainScreen> {
             child: CustomScrollView(
               slivers: [
                 SliverFillRemaining(
-                  child: Column(
-                    children: [
-                      const SearchBar(),
-                      mainState.searchingError
-                          ? const ErrorWithText()
-                          : const CurrentDay(),
-                      const Spacer(),
-                      mainState.searchingError ? Container() : const ListOfDays(),
-                    ],
-                  ),
+                  child: OrientationBuilder(builder: (_, orientation) {
+                    if (orientation.index == 1) {
+                      return HorizontalOrientation();
+                    } else {
+                      return PortraitOrientation();
+                    }
+                  }),
                 ),
               ],
             ),
