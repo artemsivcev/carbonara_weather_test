@@ -48,6 +48,17 @@ dependencies:
   #to open url
   url_launcher: ^6.0.20
 
+  # network
+  dio: ^4.0.0
+  json_serializable: ^6.1.5
+  json_annotation: ^4.4.0
+
+  # DB
+  flutter_secure_storage: ^5.0.2
+
+  # util
+  logger: ^1.1.0
+
 dev_dependencies:
   dart_code_metrics: ^4.12.0
   build_runner: ^2.1.7
