@@ -17,15 +17,3 @@ Future<void> setupInjection() async {
 
   await injector.allReady();
 }
-
-// /// Returns a registered injection with a type T.
-// /// If injector not found a such injection then a null returned.
-// dynamic getInjectionByType<T extends Object>() {
-//   try {
-//     return injector<T>();
-//   } catch (_) {
-//     // injector can not find a injection with type T
-//
-//     return null;
-//   }
-// }

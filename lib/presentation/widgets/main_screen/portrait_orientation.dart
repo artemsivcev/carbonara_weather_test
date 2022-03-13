@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'current_day.dart';
 import 'list_of_days.dart';
 
+/// Portrait Orientation widgets location
 class PortraitOrientation extends StatelessWidget {
   PortraitOrientation({Key? key}) : super(key: key);
   final mainState = injector<MainState>();

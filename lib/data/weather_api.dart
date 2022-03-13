@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 
 import 'api/network_service/services/weather_api_service.dart';
 
+/// WeatherApi class extends WeatherRepository and communicate with api service
 class WeatherApi extends WeatherRepository {
   late final WeatherApiService _weatherApiService;
   final Logger logger = Logger();

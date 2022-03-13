@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 import '../../interceptors/logger_interceptor.dart';
 
-/// The class reliable for backend requests.
+/// Base api service with dio init
 abstract class ApiServiceBase {
   /// dio for requests needing token
   final Dio dio = Dio(

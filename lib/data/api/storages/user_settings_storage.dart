@@ -1,5 +1,6 @@
 import 'base/safe_storage_base.dart';
 
+/// UserSettingsStorage need to save and get some user settings
 class UserSettingsStorage extends SafeStorageBase {
   static const _keyIsFahrenheit = "is_fahrenheit";
   static const _keyUserCity = "user_city";

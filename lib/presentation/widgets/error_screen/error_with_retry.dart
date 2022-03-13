@@ -4,6 +4,7 @@ import 'package:carbonara_weather_test/domain/states/main_state.dart';
 import 'package:carbonara_weather_test/presentation/widgets/common/button.dart';
 import 'package:flutter/widgets.dart';
 
+/// Widget with error text and retry button
 class ErrorWithRetry extends StatelessWidget {
   ErrorWithRetry({Key? key}) : super(key: key);
   final mainState = injector<MainState>();

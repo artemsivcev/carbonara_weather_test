@@ -2,10 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part "city_data.g.dart";
 
+/// Model class with city info.
+/// Response on search
 @JsonSerializable()
 class CityData {
-  //data example
-  // [{"title":"Paris","location_type":"City","woeid":615702,"latt_long":"48.856930,2.341200"}]
 
   final String title;
   final String location_type;

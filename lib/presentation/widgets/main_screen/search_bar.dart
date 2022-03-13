@@ -4,6 +4,7 @@ import 'package:carbonara_weather_test/domain/constants/text_styles.dart';
 import 'package:carbonara_weather_test/domain/states/main_state.dart';
 import 'package:flutter/material.dart';
 
+/// City search bar widget
 class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
 

@@ -6,6 +6,8 @@ import 'package:carbonara_weather_test/presentation/widgets/error_screen/error_w
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+/// Main error screen.
+/// State show it if there is error from api
 class ErrorScreen extends StatefulWidget {
   const ErrorScreen({Key? key}) : super(key: key);
 

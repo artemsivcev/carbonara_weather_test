@@ -10,30 +10,36 @@ part 'main_state.g.dart';
 
 class MainState = _MainState with _$MainState;
 
-/// State is used for manipulating with main settings of the game.
-/// For example, when the user wants to go back or choosing
-/// to play the game with image or not.
+/// State is used for manipulating with main settings of the app.
 abstract class _MainState with Store {
   final WeatherApi weatherApi = injector<WeatherApi>();
   final UserSettingsApi userSettingsApi = injector<UserSettingsApi>();
 
+  /// Bool for loader state
   @observable
   bool isLoading = false;
 
+  /// If there is some error when you searching a city
   @observable
   bool searchingError = false;
 
+  /// If there is some error on any other api call
   @observable
   bool dataFetchingError = false;
 
+  /// Controller for user city search
   final TextEditingController userCityController = TextEditingController();
 
+  /// selected day with weather info
   @observable
   ConsolidatedWeather? selectedWeather;
 
+  /// Last loaded object with weather info from api
   @observable
   Weather? lastLoadedWeather;
 
+  /// userPrevCity return last user city.
+  /// If there is no any, then return default city
   Future<String> get userPrevCity async {
     var prevUserCity = await userSettingsApi.getUserCity();
     if (prevUserCity != null && prevUserCity.isNotEmpty) {
@@ -42,6 +48,8 @@ abstract class _MainState with Store {
     return Constants.defaultCity;
   }
 
+  /// loadDegrees return user preferred degree state.
+  /// Default is C°
   Future<String> get loadDegrees async {
     var prevUserDegrees = await userSettingsApi.getUserTempType();
     if (prevUserDegrees) {
@@ -52,9 +60,11 @@ abstract class _MainState with Store {
     return "C°";
   }
 
+  /// observable userDegrees current info
   @observable
   String userDegrees = "C°";
 
+  /// Function load user data from vault
   @action
   Future<void> initUserData() async {
     var city = await userPrevCity;
@@ -62,6 +72,9 @@ abstract class _MainState with Store {
     await loadDegrees;
   }
 
+  /// Main function to search and load weather info
+  /// It takes city from controller and send it to api,
+  /// then it takes WOEID and search weather by it
   @action
   Future<void> fetchDataByCurrentCity() async {
     isLoading = true;
@@ -87,11 +100,13 @@ abstract class _MainState with Store {
     isLoading = false;
   }
 
+  /// Function to reset errors state to false
   void resetErrors() {
     dataFetchingError = false;
     searchingError = false;
   }
 
+  /// Function return current city from controller or user previous city
   Future<String> getCurrentCity() async {
     var city = "";
     if (userCityController.text.isNotEmpty) {
@@ -102,15 +117,18 @@ abstract class _MainState with Store {
     return city;
   }
 
+  /// Function to save user city to vault
   void saveUserCity(String city) {
     userSettingsApi.saveUserCity(city: city);
   }
 
+  /// Function to select weather to show
   @action
   void selectDay(int index) {
     selectedWeather = lastLoadedWeather!.consolidated_weather[index];
   }
 
+  /// Function to change user degree and save it to vault
   @action
   Future<void> changeDegrees() async {
     var isFahrenheit = false;

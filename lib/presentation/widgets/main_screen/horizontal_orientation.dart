@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'current_day.dart';
 import 'list_of_days.dart';
 
+/// Horizontal Orientation widgets location
 class HorizontalOrientation extends StatelessWidget {
   HorizontalOrientation({Key? key}) : super(key: key);
   final mainState = injector<MainState>();

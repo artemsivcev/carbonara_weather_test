@@ -6,6 +6,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part "weather.g.dart";
 
+/// Main weather info model
+/// Contains ConsolidatedWeather class with weather info
+/// and normalization for some variables
 @JsonSerializable()
 class Weather {
   final String time;

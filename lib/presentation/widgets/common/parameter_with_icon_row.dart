@@ -2,6 +2,7 @@ import 'package:carbonara_weather_test/domain/constants/colours.dart';
 import 'package:carbonara_weather_test/domain/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
+/// Widget with iconData and some text
 class ParameterWithIconRow extends StatelessWidget {
   const ParameterWithIconRow({Key? key, required this.icon, required this.text})
       : super(key: key);

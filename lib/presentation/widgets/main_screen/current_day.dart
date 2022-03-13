@@ -7,6 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+/// Widget with current day weather info
+/// Represent ability of custom screenState and image resize
+/// We can move all this resize logic into the state
 class CurrentDay extends StatefulWidget {
   const CurrentDay({Key? key}) : super(key: key);
 

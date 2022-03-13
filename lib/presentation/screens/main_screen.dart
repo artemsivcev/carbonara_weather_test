@@ -10,6 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 
+/// Main app screen
+/// Contains:
+/// 1. Search Bar - where you can choose any city
+/// 2. Current selected day - shows current weather info
+/// 3. List of other days
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 

@@ -1,16 +1,51 @@
-# carbonara_weather_test
+# carbonara_weather_test  ![Generic badge](https://img.shields.io/badge/flutter-blue?logo=flutter&style=flat)  ![Generic badge](https://img.shields.io/badge/platform-android-8bd08d.svg)  ![Generic badge](https://img.shields.io/badge/platform-iOS-cacaca.svg)
 
-carbonara weather app for test task
+This is a test app for interview.
+## Preview
 
-## Getting Started
+![enter image description here](https://s7.gifyu.com/images/preview_app.gif)
 
-This project is a starting point for a Flutter application.
+## PreBuild
 
-A few resources to get you started if this is your first Flutter project:
+**run cleanAndRebuild.sh**
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## What it can
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- We have [api](https://www.metaweather.com/api/) integration
+- Custom user city search
+- Current weather info
+- List with weather info for other days
+- C°/F° change
+- Different mobile orientation support
+- User prefs storage
+
+## How it works
+
+Files generations.  
+Generation used to create json's for models and in mobX.
+
+After cloning the project and getting packages use the command bellow:  
+flutter packages pub run build_runner build
+
+In future, you maybe will be need to resolve some conflicts with generated  
+.g.dart files. You can delete they manually or by command:  
+flutter packages pub run build_runner build --delete-conflicting-outputs
+
+For all this needs we have cleanAndRebuild.sh in project root, just run it.
+  
+-----------  
+
+MobX  
+In the ptoject using several MobX plugins: mobx, flutter_mobx, mobx_codegen.  
+See https://pub.dev/documentation/mobx/latest/.
+  
+-----------  
+
+Json generation  
+For json generation: https://pub.dev/documentation/json_annotation/latest/
+  
+-----------  
+
+Logging  
+For loggin used Logger package:  
+https://pub.dev/documentation/logger/latest/

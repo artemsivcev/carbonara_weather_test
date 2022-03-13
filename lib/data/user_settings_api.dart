@@ -2,6 +2,8 @@ import 'package:carbonara_weather_test/domain/repositories/user_settings_reposit
 
 import 'api/storages/user_settings_storage.dart';
 
+/// UserSettingsApi class extends UserSettingsRepository
+/// and communicate with storage service
 class UserSettingsApi extends UserSettingsRepository {
   late final UserSettingsStorage _userSettingsStorage;
 

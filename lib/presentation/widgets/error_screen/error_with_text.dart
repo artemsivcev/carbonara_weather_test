@@ -1,6 +1,7 @@
 import 'package:carbonara_weather_test/domain/constants/text_styles.dart';
 import 'package:flutter/widgets.dart';
 
+/// Widget ony with error text
 class ErrorWithText extends StatelessWidget {
   const ErrorWithText({Key? key}) : super(key: key);
 

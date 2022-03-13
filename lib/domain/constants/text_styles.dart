@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'colours.dart';
-
+/// Text styles constants
 TextStyle textStyleMain16 = TextStyle(
     color: colorsTextMain,
     fontWeight: FontWeight.w600,

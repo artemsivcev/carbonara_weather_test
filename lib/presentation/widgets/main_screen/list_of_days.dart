@@ -4,6 +4,7 @@ import 'package:carbonara_weather_test/domain/states/main_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+/// Widget with list of other days and weather
 class ListOfDays extends StatefulWidget {
   const ListOfDays({Key? key}) : super(key: key);
 
